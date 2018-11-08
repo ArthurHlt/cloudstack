@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
@@ -819,7 +820,7 @@ public class IpAddressManagerImpl extends ManagerBase implements IpAddressManage
                         throw new AccountLimitException("Maximum number of public IP addresses for account: " + owner.getAccountName() + " has been exceeded.");
                     }
                 }
-
+                Collections.sort(addrs, new IpAddressComparator());
                 IPAddressVO finalAddr = null;
                 for (final IPAddressVO possibleAddr: addrs) {
                     if (possibleAddr.getState() != IpAddress.State.Free) {
