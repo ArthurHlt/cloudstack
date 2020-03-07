@@ -84,9 +84,17 @@ public class HostAntiAffinityCircleProcessor extends AffinityProcessorBase imple
                 }
             }
         }
-        if (hostCounters.isEmpty() || this.haveSameNumberOfVms(hostCounters)) {
+        if (hostCounters.isEmpty()) {
             return;
         }
+
+        if (this.haveSameNumberOfVms(hostCounters)) {
+            for (Long hostId : hostCounters.keySet()) {
+                avoid.addHost(hostId);
+            }
+            return;
+        }
+
         int minValue = this.minValueOfVms(hostCounters);
 
         for (Long hostId : hostCounters.keySet()) {
