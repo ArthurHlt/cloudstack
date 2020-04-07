@@ -89,9 +89,7 @@ public class HostAntiAffinityCircleProcessor extends AffinityProcessorBase imple
         }
 
         if (this.haveSameNumberOfVms(hostCounters)) {
-            for (Long hostId : hostCounters.keySet()) {
-                avoid.addHost(hostId);
-            }
+            // if same number of vms we should let it chose normally
             return;
         }
 
